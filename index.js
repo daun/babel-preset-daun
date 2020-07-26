@@ -8,10 +8,12 @@ module.exports = declare((api, options) => {
 
   const {
     modules = 'auto',
+    corejs = 3,
+    useBuiltIns = 'usage',
     looseClasses = false,
     runtimeVersion,
     runtimeHelpersUseESModules = !modules,
-    transformRuntime = true,
+    transformRuntime = false,
   } = options;
 
   if (typeof modules !== 'boolean' && modules !== 'auto') {
@@ -19,34 +21,25 @@ module.exports = declare((api, options) => {
   }
 
   const debug = typeof options.debug === 'boolean' ? options.debug : false;
-  const development = typeof options.development === 'boolean'
-    ? options.development
-    : api.cache.using(() => process.env.NODE_ENV === 'development');
 
   return {
     presets: [
       [require('@babel/preset-env'), {
         debug,
-        exclude: [
-          'transform-async-to-generator',
-          'transform-template-literals',
-          'transform-regenerator',
-        ],
         modules: modules === false ? false : 'auto',
+        corejs,
+        useBuiltIns,
+        shippedProposals: true,
       }],
-      [require('@babel/preset-react'), { development }],
     ],
     plugins: [
+      require('babel-plugin-webpack-chunkname'),
       looseClasses ? [require('@babel/plugin-transform-classes'), {
-        loose: true,
+        loose: looseClasses,
       }] : null,
-
-      [require('@babel/plugin-transform-template-literals'), {
-        spec: true,
-      }],
+      require('@babel/plugin-proposal-class-properties'),
       require('@babel/plugin-transform-property-mutators'),
       require('@babel/plugin-transform-member-expression-literals'),
-      require('@babel/plugin-transform-property-literals'),
       require('@babel/plugin-proposal-nullish-coalescing-operator'),
       require('@babel/plugin-proposal-numeric-separator'),
       require('@babel/plugin-proposal-optional-catch-binding'),
