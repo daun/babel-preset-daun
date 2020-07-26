@@ -1,58 +1,43 @@
-# babel-preset-airbnb
+# Babel Preset
 
-> A babel preset for transforming your JavaScript for Airbnb.
+A default babel preset for my personal projects.
 
-Currently contains transforms for all [stage 4](https://tc39.github.io/ecma262/) (ES2018) and [stage 3](https://github.com/tc39/proposals#active-proposals) syntax that is permitted in the [Airbnb Style Guide](https://github.com/airbnb/javascript). Please note that if usage of a stage 3 proposal is not explicitly mentioned in the Airbnb Style Guide, then it will not be enabled here. Additionally, stage 4 syntax that is excluded is as follows:
- - generators: `regenerator-runtime` is too heavyweight for our use.
- - `async/await`: `regenerator-runtime` is too heavyweight for our use, and [async-to-promises](https://www.npmjs.com/package/babel-plugin-async-to-promises) is not yet complete enough to be safely used.
- - async iterators: depends on both generators and `async function`s
- - lifted template literal restrictions: we do not use tagged template literals, nor implement custom DSLs, otherwise we would enable this.
+## Transforms
+
+Contains transforms for all [stage 4](https://tc39.github.io/ecma262/) and [stage 3](https://github.com/tc39/proposals#active-proposals) syntax. Stage 4 syntax that is excluded is as follows:
+
+- generators: `regenerator-runtime` is too heavyweight for our use.
+- `async/await`: `regenerator-runtime` is too heavyweight for our use, and [async-to-promises](https://www.npmjs.com/package/babel-plugin-async-to-promises) is not yet complete enough to be safely used.
+- async iterators: depends on both generators and `async function`s
+- lifted template literal restrictions: we do not use tagged template literals, nor implement custom DSLs, otherwise we would enable this.
 
 ## Install
 
 ```sh
-$ npm install --save-dev babel-preset-airbnb
+npm install --save-dev babel-preset-daun
 ```
 
 ## Usage
 
-### Via `.babelrc` (Recommended)
-
-**.babelrc**
+Add the preset to your `.babelrc`:
 
 ```json
 {
-  "presets": ["airbnb"]
+  "presets": ["daun"]
 }
-```
-
-### Via CLI
-
-```sh
-$ babel script.js --presets airbnb
-```
-
-### Via Node API
-
-```javascript
-require('@babel/core').transform('code', {
-  presets: ['airbnb']
-});
 ```
 
 ### Targeting Environments
 
-This module uses @babel/preset-env to target specific environments.
-
-Please refer to [@babel/preset-env#targets](https://babeljs.io/docs/en/babel-preset-env#targets) for a list of available options.
+This module uses `@babel/preset-env` to target specific environments. Please refer to [@babel/preset-env#targets](https://babeljs.io/docs/en/babel-preset-env#targets) for a list of available options.
 
 For a list of browsers please see [browserlist](https://github.com/ai/browserslist).
 
-You may override our default list of targets by providing your own `targets` key.
+You may override the default list of targets by providing a `targets` key.
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "targets": {
       "chrome": 50,
       "ie": 11,
@@ -62,23 +47,11 @@ You may override our default list of targets by providing your own `targets` key
 }
 ```
 
-The following transpiles only for Node v6.
+Or inherit the default list of browsers and extend them using `additionalTargets`.
 
 ```json
 {
-  "presets": [["airbnb", {
-    "targets": {
-      "node": 6
-    }
-  }]]
-}
-```
-
-If you wish, you can also inherit our default list of browsers and extend them using `additionalTargets`.
-
-```json
-{
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "additionalTargets": {
       "chrome": 42,
       "ie": 8
@@ -87,11 +60,11 @@ If you wish, you can also inherit our default list of browsers and extend them u
 }
 ```
 
-You may override our default debug option by providing your own `debug` key.
+Enable debugging by providing a `debug` key.
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "debug": true
   }]]
 }
@@ -105,7 +78,7 @@ You may override our default development option by providing your own boolean `d
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "development": false
   }]]
 }
@@ -120,7 +93,7 @@ To enable this transformation with the default options, set the `removePropTypes
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "removePropTypes": true
   }]]
 }
@@ -131,7 +104,7 @@ The default options that will be used are:
 ```js
 {
   mode: 'wrap',
-  additionalLibraries: ['airbnb-prop-types'],
+  additionalLibraries: ['daun-prop-types'],
   ignoreFilenames: ['node_modules'],
 }
 ```
@@ -140,7 +113,7 @@ Default options can be overridden using the `removePropTypes` option. These opti
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "removePropTypes": {
       "mode": "remove"
     }
@@ -156,7 +129,7 @@ By default, this preset will compile classes in normal mode. This is safer, but 
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "looseClasses": true,
   }]]
 }
@@ -174,13 +147,13 @@ ex. If package.json has `"@babel/runtime": "^7.5.5"` then you can use:
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "runtimeVersion": "7.5.5",
   }]]
 }
 ```
 
-Note that this will result in a runtime breakage if the version passed into the airbnb preset is newer than the version of the babel runtime actually being used at build time.
+Note that this will result in a runtime breakage if the version passed into the preset is newer than the version of the babel runtime actually being used at build time.
 
 ## Disabling `plugin-transform-runtime`
 
@@ -192,7 +165,7 @@ You can use the `modules` option to enable transformation of modules given to th
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "modules": "auto"
   }]]
 }
@@ -204,7 +177,7 @@ You can use the `runtimeHelpersUseESModules` option to prevent transformation of
 
 ```json
 {
-  "presets": [["airbnb", {
+  "presets": [["daun", {
     "runtimeHelpersUseESModules": true
   }]]
 }

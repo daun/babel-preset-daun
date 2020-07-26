@@ -1,17 +1,17 @@
 {
-  "name": "babel-preset-airbnb",
-  "version": "5.0.0",
-  "description": "A babel preset for transforming your JavaScript for Airbnb",
+  "name": "babel-preset-daun",
+  "version": "1.0.0",
+  "description": "A babel preset",
   "main": "index.js",
-  "author": "Josh Perez <josh.perez@airbnb.com>",
+  "author": "Philipp Daun <daun@daun.ltd>",
   "repository": {
     "type": "git",
-    "url": "git@github.com:airbnb/babel-preset-airbnb.git"
+    "url": "git@github.com:daun/babel-preset-daun.git"
   },
   "keywords": [
     "babel",
+    "babel-preset",
     "es6",
-    "es2015",
     "javascript"
   ],
   "license": "MIT",
