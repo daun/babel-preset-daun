@@ -22,7 +22,6 @@ module.exports = declare((api, options) => {
   const {
     modules = 'auto',
     targets = buildTargets(options),
-    removePropTypes,
     looseClasses = false,
     runtimeVersion,
     runtimeHelpersUseESModules = !modules,
@@ -56,12 +55,6 @@ module.exports = declare((api, options) => {
       looseClasses ? [require('@babel/plugin-transform-classes'), {
         loose: true,
       }] : null,
-
-      removePropTypes ? [require('babel-plugin-transform-react-remove-prop-types'), Object.assign({
-        mode: 'wrap',
-        additionalLibraries: ['airbnb-prop-types'],
-        ignoreFilenames: ['node_modules'],
-      }, removePropTypes)] : null,
 
       [require('@babel/plugin-transform-template-literals'), {
         spec: true,
