@@ -60,6 +60,8 @@ Or inherit the default list of browsers and extend them using `additionalTargets
 }
 ```
 
+### Debugging
+
 Enable debugging by providing a `debug` key.
 
 ```json
@@ -69,59 +71,6 @@ Enable debugging by providing a `debug` key.
   }]]
 }
 ```
-
-## React Development Mode
-
-When `process.env.NODE_ENV` is `'development'`, [the `development` mode will be set for `@babel/preset-react`](https://babeljs.io/docs/en/babel-preset-react#development).
-
-You may override our default development option by providing your own boolean `development` key.
-
-```json
-{
-  "presets": [["daun", {
-    "development": false
-  }]]
-}
-```
-
-## React PropTypes removal
-
-This preset can be configured to remove propTypes using [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) with the following default options:
-
-
-To enable this transformation with the default options, set the `removePropTypes` option to `true`:
-
-```json
-{
-  "presets": [["daun", {
-    "removePropTypes": true
-  }]]
-}
-```
-
-The default options that will be used are:
-
-```js
-{
-  mode: 'wrap',
-  additionalLibraries: ['daun-prop-types'],
-  ignoreFilenames: ['node_modules'],
-}
-```
-
-Default options can be overridden using the `removePropTypes` option. These options will be shallow-merged with the defaults:
-
-```json
-{
-  "presets": [["daun", {
-    "removePropTypes": {
-      "mode": "remove"
-    }
-  }]]
-}
-```
-
-For example, if you are using this plugin in a deployable app, you might want to use the remove mode for your production build (and disable this transform entirely in development for optimal build speeds).
 
 ## Classes loose mode
 
