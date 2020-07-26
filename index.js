@@ -2,26 +2,12 @@
 
 const { declare } = require('@babel/helper-plugin-utils');
 
-const defaultTargets = {
-  android: 35,
-  chrome: 40,
-  edge: 18,
-  ie: 11,
-  firefox: 72,
-  safari: 12,
-};
-
-function buildTargets({ additionalTargets }) {
-  return Object.assign({}, defaultTargets, additionalTargets);
-}
-
 module.exports = declare((api, options) => {
   // see docs about api at https://babeljs.io/docs/en/config-files#apicache
   api.assertVersion('^7.0.0');
 
   const {
     modules = 'auto',
-    targets = buildTargets(options),
     looseClasses = false,
     runtimeVersion,
     runtimeHelpersUseESModules = !modules,
@@ -47,7 +33,6 @@ module.exports = declare((api, options) => {
           'transform-regenerator',
         ],
         modules: modules === false ? false : 'auto',
-        targets,
       }],
       [require('@babel/preset-react'), { development }],
     ],
