@@ -33,7 +33,9 @@ module.exports = declare((api, options) => {
       }],
     ],
     plugins: [
-      require('babel-plugin-webpack-chunkname'),
+      [require('babel-plugin-webpack-chunkname'), {
+        getChunkName: path => path.replace(/^[./]+|(\.js$)|@|\bdaun[-_/]/g, ''),
+      }],
       looseClasses ? [require('@babel/plugin-transform-classes'), {
         loose: looseClasses,
       }] : null,
