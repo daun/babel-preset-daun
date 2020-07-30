@@ -29,6 +29,7 @@ module.exports = declare((api, options) => {
         corejs,
         useBuiltIns,
         shippedProposals: true,
+        bugfixes: true,
       }],
     ],
     plugins: [
