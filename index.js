@@ -13,7 +13,7 @@ module.exports = declare((api, options) => {
     looseClasses = false,
     runtimeVersion,
     runtimeHelpersUseESModules = !modules,
-    transformRuntime = false,
+    transformRuntime = true,
     debug = false,
   } = options;
 
