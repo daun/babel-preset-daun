@@ -14,18 +14,17 @@ module.exports = declare((api, options) => {
     runtimeVersion,
     runtimeHelpersUseESModules = !modules,
     transformRuntime = false,
+    debug = false,
   } = options;
 
   if (typeof modules !== 'boolean' && modules !== 'auto') {
     throw new TypeError('babel-preset-daun only accepts `true`, `false`, or `"auto"` as the value of the "modules" option');
   }
 
-  const debug = typeof options.debug === 'boolean' ? options.debug : false;
-
   return {
     presets: [
       [require('@babel/preset-env'), {
-        debug,
+        debug: Boolean(debug),
         modules: modules === false ? false : 'auto',
         corejs,
         useBuiltIns,
